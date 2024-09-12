@@ -1,9 +1,14 @@
 package com.example.sentra.base;
 
-public interface BaseService<T> {
-    T create(Object data);
+public interface BaseService<T,D> {
 
-    T create(Object data, String id);
+    T create(D data, String id);
 
-    // handle rest
+    T findOne(String id, Object tokenData);
+
+    T findAll();
+
+    T update(String id, D data, Object tokenData);
+
+    T delete(String id, Object tokenData);
 }
