@@ -1,10 +1,12 @@
 package com.example.sentra.base;
 
+import java.util.Optional;
+
 public interface BaseService<T,D> {
 
     T create(D data, String id);
 
-    T findOne(String id, Object tokenData);
+    Optional<T> findOne(String id, Object tokenData);
 
     T findAll();
 

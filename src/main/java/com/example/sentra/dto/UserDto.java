@@ -8,11 +8,11 @@ import lombok.Data;
 @Data
 public class UserDto {
     
-    @NotBlank(message = "Password is required")
-    @Size(min=3, max = 5)
+    @NotBlank(message = "username is required")
+    @Size(min=3, max = 55)
     private String username;
 
-    @NotBlank(message = "Password is required")
+    @NotBlank(message = "email is required")
     @Email()
     private String email;
 

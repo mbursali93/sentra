@@ -1,5 +1,10 @@
 package com.example.sentra.service;
 
+import javax.swing.text.html.Option;
+
+// import org.apache.el.stream.Optional;
+import java.util.Optional;
+
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -10,7 +15,7 @@ import com.example.sentra.model.UserModel;
 import com.example.sentra.repository.UserRepository;
 
 @Service
-public class UserService implements BaseService<UserModel, UserDto> {
+public class UserService  {
 
     @Autowired
     private UserRepository userRepository;
@@ -18,7 +23,7 @@ public class UserService implements BaseService<UserModel, UserDto> {
     @Autowired
     private ModelMapper modelMapper;
 
-    @Override
+    // @Override
     public UserModel create(UserDto data, String id) {
         // TODO Auto-generated method stub
 
@@ -30,26 +35,29 @@ public class UserService implements BaseService<UserModel, UserDto> {
 
     }
 
-    @Override
-    public UserModel findOne(String id, Object tokenData) {
+    // @Override
+    public Optional<UserModel> findOne(String id, Object tokenData) {
         // TODO Auto-generated method stub
-        return null;
+
+    Optional<UserModel> optionalUser = userRepository.findById(id);
+
+        return optionalUser;
     }
 
-    @Override
+    // @Override
     public UserModel findAll() {
         // TODO Auto-generated method stub
         return null;
     }
 
-    @Override
+    // @Override
     public UserModel update(String id, UserDto data, Object tokenData) {
         // TODO Auto-generated method stub
         return null;
     }
 
     
-    @Override
+    // @Override
     public UserModel delete(String id, Object tokenData) {
         // TODO Auto-generated method stub
         return null;

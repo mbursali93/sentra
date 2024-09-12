@@ -1,6 +1,7 @@
 package com.example.sentra.base;
 
 import java.time.Instant;
+import java.time.LocalDate;
 
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.Id;
@@ -21,10 +22,12 @@ public class BaseModel {
     private String id;
 
     @CreatedDate
-    private Instant createdAt;
+    private Instant createdAt = Instant.now();
 
     @LastModifiedDate
     private Instant updatedAt;
+
+    private boolean isDeleted = false; 
 
     private Instant deletedAt = null;
 }

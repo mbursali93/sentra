@@ -6,18 +6,21 @@ import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.Query;
 
 import com.example.sentra.model.UserModel;
-import com.example.sentra.repository.interfaces.CustomUserRepository;
+
+import java.util.Optional;
 
 public class CustomUserRepositoryImpl implements CustomUserRepository {
 
     @Autowired
     private MongoTemplate mongoTemplate;
 
-    public UserModel findById(String id) {
+    public Optional<UserModel> findById(String id) {
+        System.out.println("\n \n ananın ta amını siksinler");
         Query query = this.createForNonDeleted();
         query.addCriteria(Criteria.where("id").is(id));
 
-       return mongoTemplate.findOne(query, UserModel.class);
+        UserModel user = mongoTemplate.findOne(query, UserModel.class);
+        return Optional.ofNullable(user);
     }
 
     public UserModel findByUsername(String username) {
