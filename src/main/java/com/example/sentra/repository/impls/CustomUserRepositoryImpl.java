@@ -51,14 +51,14 @@ public class CustomUserRepositoryImpl implements CustomUserRepository {
 
     
     Criteria andCriteria = new Criteria().andOperator(
-        Criteria.where("age").gt(25),
-        Criteria.where("active").is(true)
+        Criteria.where("isDeleted").is(false)
+        // Criteria.where("active").is(true)
     );
 
   
     Criteria orCriteria = new Criteria().orOperator(
-        Criteria.where("role").is("admin"),
-        Criteria.where("role").is("moderator")
+        Criteria.where("username").regex("", "i"),
+        Criteria.where("email").regex("", "i")
     );
 
     Criteria combinedCriteria = new Criteria().andOperator(
