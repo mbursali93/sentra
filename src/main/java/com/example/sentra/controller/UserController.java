@@ -2,6 +2,8 @@ package com.example.sentra.controller;
 
 // import org.apache.el.stream.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
+
+import java.util.List;
 import java.util.Optional;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -42,5 +44,12 @@ public class UserController {
         Optional<UserModel> user = userService.findOne(id, id);
 
         return user;
+    }
+
+    @GetMapping()
+    List<UserModel> findAll(@RequestParam(required = false, defaultValue = "1") String page, @RequestParam(required = false) String dalga) {
+
+        System.out.println(page);
+        return null;
     }
 }
