@@ -1,8 +1,11 @@
 package com.example.sentra.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import com.example.sentra.dto.UserDto;
+import com.example.sentra.expections.CustomException;
 import com.example.sentra.model.UserModel;
 import com.example.sentra.repository.UserRepository;
 
@@ -15,12 +18,22 @@ public class AuthService {
     @Autowired
     private UserService userService;
 
-    public UserModel register() {
+    @Autowired
+    private BCryptPasswordEncoder bCryptPasswordEncoder;
 
-        return null;
+
+    public UserModel register(UserDto userDto) {
+
+        return userService.create(userDto, "");
     }
 
-    public String login() {
+    public String login(String username, String password) {
+
+        UserModel user = userRepository.findByUsername(username);
+        boolean passwordMatches = bCryptPasswordEncoder.matches(password, user.getPassword());
+
+        if (!passwordMatches)
+            throw new CustomException("Wrong credentials", "WRONG_CREDENTIALS");
 
         return null;
     }

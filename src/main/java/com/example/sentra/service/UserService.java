@@ -7,6 +7,7 @@ import java.util.Optional;
 
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.example.sentra.base.BaseService;
@@ -23,6 +24,9 @@ public class UserService  {
     @Autowired
     private ModelMapper modelMapper;
 
+    @Autowired
+    private BCryptPasswordEncoder bCryptPasswordEncoder;
+
     // @Override
     public UserModel create(UserDto data, String id) {
         // TODO Auto-generated method stub
@@ -30,6 +34,11 @@ public class UserService  {
         // Add bcrypt
         
         UserModel userData = modelMapper.map(data, UserModel.class);
+
+        String password = userData.getPassword();
+        String hashedPassword = bCryptPasswordEncoder.encode(password);
+
+        userData.setPassword(hashedPassword);
 
         return userRepository.save(userData);
 
