@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.sentra.dto.UserDto;
+import com.example.sentra.dto.auth.LoginDto;
 import com.example.sentra.model.UserModel;
 import com.example.sentra.service.AuthService;
 
@@ -26,7 +27,10 @@ public class AuthController {
     }
 
     @PostMapping("/login")
-    public String login(@RequestBody String username, @RequestBody String password) {
+    public String login(@RequestBody LoginDto data) {
+        String username = data.getUsername();
+        String password = data.getPassword();
+        
         return authService.login(username, password);
     }
 }

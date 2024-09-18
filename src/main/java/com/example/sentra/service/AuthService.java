@@ -30,12 +30,13 @@ public class AuthService {
     public String login(String username, String password) {
 
         UserModel user = userRepository.findByUsername(username);
+        
         boolean passwordMatches = bCryptPasswordEncoder.matches(password, user.getPassword());
 
         if (!passwordMatches)
-            throw new CustomException("Wrong credentials", "WRONG_CREDENTIALS");
+            throw new CustomException("Wrong credentials", "USER_NOT_FOUND");
 
-        return null;
+        return "null";
     }
 
     public void logout() {
