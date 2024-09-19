@@ -26,11 +26,12 @@ public class HomeService implements BaseService<HomeModel, CreateHomeDto> {
     public HomeModel create(CreateHomeDto data, String userId) {
         String homeName = data.getHomeName();
         boolean homeNameExists = homeRepository.homeNameExistsForOwner(homeName, userId);
-       
+       System.out.println(homeNameExists);
         if (homeNameExists)
             throw new CustomException(userId, homeName);
         
         HomeModel home = modelMapper.map(data, HomeModel.class);
+        home.setOwnerId(userId);
 
         homeRepository.save(home);
         return home;
