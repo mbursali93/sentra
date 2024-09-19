@@ -1,5 +1,5 @@
 package com.example.sentra.dto;
 
-public class UpdateHomeDto {
+public class UpdateHomeDto  {
     
 }
