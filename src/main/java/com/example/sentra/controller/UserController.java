@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.example.sentra.dto.UserDto;
+import com.example.sentra.dto.auth.UserDto;
 import com.example.sentra.model.UserModel;
 import com.example.sentra.service.UserService;
 

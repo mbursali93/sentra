@@ -11,7 +11,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.example.sentra.base.BaseService;
-import com.example.sentra.dto.UserDto;
+import com.example.sentra.dto.auth.UserDto;
 import com.example.sentra.model.UserModel;
 import com.example.sentra.repository.UserRepository;
 
@@ -29,9 +29,6 @@ public class UserService  {
 
     // @Override
     public UserModel create(UserDto data, String id) {
-        // TODO Auto-generated method stub
-
-        // Add bcrypt
         
         UserModel userData = modelMapper.map(data, UserModel.class);
 

@@ -37,5 +37,9 @@ public class UserModel extends BaseModel {
 
     @Builder.Default
     boolean isAdmin = false;
+
+    public boolean getIsAdmin() {
+        return this.isAdmin;
+    }
     
 }
