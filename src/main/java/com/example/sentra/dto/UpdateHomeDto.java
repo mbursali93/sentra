@@ -1,5 +1,11 @@
 package com.example.sentra.dto;
 
-public class UpdateHomeDto  {
+import jakarta.validation.constraints.Size;
+import lombok.Data;
+
+@Data
+public class UpdateHomeDto {
     
+    @Size(min = 3, max = 55)
+    private String homeName;
 }

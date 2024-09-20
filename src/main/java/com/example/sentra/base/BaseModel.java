@@ -25,7 +25,7 @@ public class BaseModel {
     private Instant createdAt = Instant.now();
 
     @LastModifiedDate
-    private Instant updatedAt;
+    private Instant updatedAt = null;
 
     private boolean isDeleted = false; 
 
