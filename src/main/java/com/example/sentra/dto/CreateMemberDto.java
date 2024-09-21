@@ -1,5 +1,7 @@
 package com.example.sentra.dto;
 
+import jakarta.validation.constraints.Max;
+import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotNull;
 // import jakarta.annotation.Nonnull;
 import jakarta.validation.constraints.Pattern;
@@ -21,5 +23,9 @@ public class CreateMemberDto {
         message = "Invalid memberId, must be a valid MongoDB ObjectId"
    )
     @NotNull
-    private String memberId;
+   private String memberId;
+    
+     @Min(1)
+     @Max(10)
+     private byte roleLevel;
 }

@@ -59,10 +59,7 @@ public class HomeService implements BaseService<HomeModel, CreateHomeDto, Update
     public HomeModel findOne(String id, String userId) {
         // TODO: check if user is the member of the home
 
-        HomeModel home = homeRepository.findById(id, userId);
-        if (home == null)
-            return null; //TODO: Error Message
-        return home;
+        return homeRepository.findById(id).orElseThrow(()-> new CustomException(id, userId));
     }
 
     @Override

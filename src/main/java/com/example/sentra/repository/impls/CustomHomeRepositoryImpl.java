@@ -9,7 +9,9 @@ import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.data.mongodb.core.query.Update;
 
+import com.example.sentra.expections.CustomException;
 import com.example.sentra.model.HomeModel;
+import com.example.sentra.model.MemberModel;
 
 public class CustomHomeRepositoryImpl implements CustomHomeRepository {
 
@@ -26,12 +28,12 @@ public class CustomHomeRepositoryImpl implements CustomHomeRepository {
 
     }
 
-    public HomeModel findById(String id, String userId) {
+    public Optional<HomeModel> findById(String id) {
         Query query = this.createForNonDeleted();
         query.addCriteria(Criteria.where("_id").is(id));
 
-       HomeModel home =  mongoTemplate.findOne(query, HomeModel.class);
-        return home;
+        HomeModel home = mongoTemplate.findOne(query, HomeModel.class);
+        return Optional.ofNullable(home);
     }
     
     public HomeModel delete(String id) {
