@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 import com.example.sentra.base.BaseService;
 import com.example.sentra.dto.CreateMemberDto;
 import com.example.sentra.dto.UpdateMemberRoleDto;
+import com.example.sentra.expections.ApiException;
 import com.example.sentra.expections.CustomException;
 import com.example.sentra.model.HomeModel;
 import com.example.sentra.model.MemberModel;
@@ -35,7 +36,7 @@ public class MemberService {
 
         Optional<HomeModel> homeOptional = homeRepository.findById(homeId);
         if (!homeOptional.isPresent())
-            throw new CustomException("", "");
+            throw new ApiException("No home found with this id", "HOME_NOT_FOUND", 404);
         
         HomeModel home = homeOptional.get();
 

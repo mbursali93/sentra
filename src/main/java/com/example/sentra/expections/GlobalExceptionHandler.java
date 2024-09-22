@@ -1,28 +1,54 @@
-// package com.example.sentra.expections;
+package com.example.sentra.expections;
 
 
-// import org.springframework.http.HttpStatus;
-// import org.springframework.http.ResponseEntity;
-// import org.springframework.web.bind.annotation.ControllerAdvice;
-// import org.springframework.web.bind.annotation.ExceptionHandler;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.validation.ObjectError;
+import org.springframework.web.bind.MethodArgumentNotValidException;
+import org.springframework.web.bind.annotation.ExceptionHandler;
+import org.springframework.web.bind.annotation.RestControllerAdvice;
+import com.example.sentra.base.ApiResponse;
 
-// @ControllerAdvice
-// public class GlobalExceptionHandler {
+import java.util.stream.Collectors;
 
-//     @ExceptionHandler(CustomException.class)
-//     public ResponseEntity<String> handleCustomException(CustomException ex) {
-//         // You can handle error codes dynamically if needed
-//         HttpStatus status;
-//         switch (ex.getErrorCode()) {
-//             case "USER_NOT_FOUND":
-//                 status = HttpStatus.NOT_FOUND;
-//                 break;
-//             case "USERNAME_ALREADY_EXISTS":
-//                 status = HttpStatus.CONFLICT;
-//                 break;
-//             default:
-//                 status = HttpStatus.BAD_REQUEST;
-//         }
-//         return new ResponseEntity<>(ex.getMessage(), status);
-//     }
-// }
+@RestControllerAdvice
+public class GlobalExceptionHandler {
+
+    @ExceptionHandler(ApiException.class)
+    public ResponseEntity<ApiResponse<String>> handleApiException(ApiException ex) {
+        ApiResponse<String> response = ApiResponse.failure(
+            ex.getMessage(), 
+            HttpStatus.BAD_REQUEST.value()
+        );
+        return new ResponseEntity<>(response, HttpStatus.BAD_REQUEST);
+    }
+
+   @ExceptionHandler(MethodArgumentNotValidException.class)
+public ResponseEntity<ApiResponse<String>> handleValidationExceptions(MethodArgumentNotValidException ex) {
+    StringBuilder errorMessage = new StringBuilder();
+
+    ex.getBindingResult().getFieldErrors().forEach(error -> 
+        errorMessage.append(error.getField()).append(": ").append(error.getDefaultMessage()).append(", ")
+    );
+
+    if (errorMessage.length() > 0) {
+        errorMessage.setLength(errorMessage.length() - 2);
+    }
+
+    ApiResponse<String> response = ApiResponse.failure(
+        errorMessage.toString(), 
+        HttpStatus.BAD_REQUEST.value()
+    );
+    return new ResponseEntity<>(response, HttpStatus.BAD_REQUEST);
+}
+
+
+    @ExceptionHandler(Exception.class)
+    public ResponseEntity<ApiResponse<String>> handleGenericException(Exception ex) {
+        ApiResponse<String> response = ApiResponse.failure(
+            "An unexpected error occurred: " + ex.getMessage(), 
+            HttpStatus.INTERNAL_SERVER_ERROR.value()
+        );
+        return new ResponseEntity<>(response, HttpStatus.INTERNAL_SERVER_ERROR);
+    }
+}
