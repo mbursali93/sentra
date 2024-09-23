@@ -2,6 +2,9 @@ package com.example.sentra.service;
 
 import org.modelmapper.spi.ValueReader.Member;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.Cacheable;
+import org.springframework.cache.annotation.EnableCaching;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
 import com.example.sentra.base.BaseService;
@@ -36,7 +39,7 @@ public class MemberService {
 
         Optional<HomeModel> homeOptional = homeRepository.findById(homeId);
         if (!homeOptional.isPresent())
-            throw new ApiException("No home found with this id", "HOME_NOT_FOUND", 404);
+            throw new ApiException("No home found with this id", "HOME_NOT_FOUND", HttpStatus.NOT_FOUND);
         
         HomeModel home = homeOptional.get();
 
@@ -98,11 +101,13 @@ public class MemberService {
         return null;
     }
 
-    
+    @Cacheable(value = "memberRoles", key = "#userId + ':' + #homeId")
     public MemberModel findOne(String homeId, String userId) {
         // TODO Auto-generated method stub
 
         MemberModel membership = memberRepository.getMembershipWithUserIdAndHouseId(homeId, userId);
+        if (membership == null)
+            throw new ApiException("No member found with this id", "NOT_FOUND", HttpStatus.NOT_FOUND);
 
         return membership;
     }

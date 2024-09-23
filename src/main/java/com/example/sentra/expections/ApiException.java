@@ -1,13 +1,13 @@
 package com.example.sentra.expections;
 
-
+import org.springframework.http.HttpStatus;
 
 public class ApiException extends RuntimeException {
 
     private final String errorCode;
-    private final int statusCode;
+    private final HttpStatus statusCode;
 
-    public ApiException(String message, String errorCode, int statusCode) {
+    public ApiException(String message, String errorCode, HttpStatus statusCode) {
         super(message);
         this.errorCode = errorCode;
         this.statusCode = statusCode;
@@ -17,7 +17,7 @@ public class ApiException extends RuntimeException {
         return errorCode;
     }
 
-    public int getStatusCode() {
+    public HttpStatus getStatusCode() {
         return statusCode;
     }
 }

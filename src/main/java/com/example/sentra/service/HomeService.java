@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 
 import com.example.sentra.base.BaseService;
 import com.example.sentra.dto.CreateHomeDto;
+import com.example.sentra.dto.CreateMemberDto;
 import com.example.sentra.dto.UpdateHomeDto;
 import com.example.sentra.expections.CustomException;
 import com.example.sentra.model.HomeModel;
@@ -24,6 +25,9 @@ public class HomeService implements BaseService<HomeModel, CreateHomeDto, Update
     @Autowired
     private ModelMapper modelMapper;
 
+    @Autowired
+    private MemberService memberService;
+
     @Override
     public HomeModel create(CreateHomeDto data, String userId) {
         String homeName = data.getHomeName();
@@ -36,6 +40,13 @@ public class HomeService implements BaseService<HomeModel, CreateHomeDto, Update
         home.setOwnerId(userId);
 
         homeRepository.save(home);
+
+        CreateMemberDto member = new CreateMemberDto();
+        member.setHomeId(home.getId());
+        member.setMemberId(userId);
+        member.setRoleLevel((byte) 10);
+
+        memberService.create(member, userId);
         return home;
     }
 

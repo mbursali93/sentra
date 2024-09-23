@@ -18,9 +18,9 @@ public class GlobalExceptionHandler {
     public ResponseEntity<ApiResponse<String>> handleApiException(ApiException ex) {
         ApiResponse<String> response = ApiResponse.failure(
             ex.getMessage(), 
-            HttpStatus.BAD_REQUEST.value()
+            ex.getStatusCode().value()
         );
-        return new ResponseEntity<>(response, HttpStatus.BAD_REQUEST);
+        return new ResponseEntity<>(response, ex.getStatusCode());
     }
 
    @ExceptionHandler(MethodArgumentNotValidException.class)
