@@ -96,7 +96,7 @@ public class MemberService {
     }
 
     
-    public MemberModel findAll(String userId) {
+    public MemberModel findAll(String homeId, String userId) {
         // TODO Auto-generated method stub
         return null;
     }
