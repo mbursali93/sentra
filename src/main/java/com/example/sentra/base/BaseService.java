@@ -6,6 +6,10 @@ public interface BaseService<T,D, U> {
 
     T create(D data, String userId);
 
+     default T create(D data) {
+        return create(data, null);
+    }
+
     T findOne(String id, String userId);
 
     T findAll(String userId);

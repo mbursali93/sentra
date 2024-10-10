@@ -19,7 +19,6 @@ public class CustomUserRepositoryImpl implements CustomUserRepository {
     private MongoTemplate mongoTemplate;
 
     public Optional<UserModel> findById(String id) {
-        System.out.println("\n \n ananın ta amını siksinler");
         Query query = this.createForNonDeleted();
         query.addCriteria(Criteria.where("id").is(id));
 
