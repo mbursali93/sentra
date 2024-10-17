@@ -1,9 +1,11 @@
 package com.example.sentra.service;
 
+import java.util.ArrayList;
 import java.util.Optional;
 
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
@@ -15,7 +17,7 @@ import com.example.sentra.model.ProductModel;
 import com.example.sentra.repository.ProductRepository;
 
 @Service
-public class ProductService implements BaseService<ProductModel, CreateProductDto, UpdateProductDto> {
+public class ProductService  {
 
     @Autowired
     private ProductRepository productRepository;
@@ -23,7 +25,7 @@ public class ProductService implements BaseService<ProductModel, CreateProductDt
     @Autowired
     private ModelMapper modelMapper;
 
-    @Override
+    
     public ProductModel create(CreateProductDto data, String userId) {
         // TODO Auto-generated method stub
 
@@ -33,19 +35,19 @@ public class ProductService implements BaseService<ProductModel, CreateProductDt
         
     }
 
-    @Override
+    
     public ProductModel delete(String id, String userId) {
         // TODO Auto-generated method stub
         return null;
     }
 
-    @Override
-    public ProductModel findAll(String userId) {
+
+    public Page<ProductModel> findAll(String filter, String search, int min, int max, int page, int size) {
         // TODO Auto-generated method stub
         return null;
     }
 
-    @Override
+    
     public ProductModel findOne(String id, String userId) {
         // TODO Auto-generated method stub
 
@@ -56,7 +58,6 @@ public class ProductService implements BaseService<ProductModel, CreateProductDt
         return product.get();
     }
 
-    @Override
     public ProductModel update(String id, UpdateProductDto data, String userId) {
         // TODO Auto-generated method stub
         return null;

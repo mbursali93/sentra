@@ -49,7 +49,7 @@ public class ProductServiceTest {
             when(productRepository.save(any(ProductModel.class))).thenReturn(product);
             when(modelMapper.map(any(), any())).thenReturn(product);
 
-            ProductModel savedProduct = productService.create(productDto);
+            ProductModel savedProduct = productService.create(productDto, "");
 
             assertEquals(product.getTitle(), savedProduct.getTitle());
             assertEquals(product.getBrand(), savedProduct.getBrand());
@@ -75,6 +75,12 @@ public class ProductServiceTest {
             assertEquals("NOT_FOUND", exception.getErrorCode());
             assertEquals(HttpStatus.NOT_FOUND, exception.getStatusCode());
         }
+
+    @Test
+    void testFindAllProducts() {
+        
+        
+    }
 
     
 
