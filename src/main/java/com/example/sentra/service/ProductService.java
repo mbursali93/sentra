@@ -38,7 +38,7 @@ public class ProductService  {
     
     public ProductModel delete(String id) {
         // TODO Auto-generated method stub
-        ProductModel product = this.findOne(id, "");
+        ProductModel product = this.findOne(id);
         
         product = productRepository.deleteProduct(id);
         return product;
@@ -51,7 +51,7 @@ public class ProductService  {
     }
 
     
-    public ProductModel findOne(String id, String userId) {
+    public ProductModel findOne(String id) {
         // TODO Auto-generated method stub
 
         Optional<ProductModel> product = productRepository.getProductById(id);
@@ -61,9 +61,11 @@ public class ProductService  {
         return product.get();
     }
 
-    public ProductModel update(String id, UpdateProductDto data, String userId) {
-        // TODO Auto-generated method stub
-        return null;
+    public ProductModel update(String id, UpdateProductDto data) {
+        this.findOne(id);
+        
+        ProductModel updateProductModel = modelMapper.map(data, ProductModel.class);
+        return this.productRepository.updateProduct(id, updateProductModel);
     }
     
 }

@@ -8,4 +8,6 @@ public interface CustomProductRepository {
     Optional<ProductModel> getProductById(String id);
 
     public ProductModel deleteProduct(String id);
+
+    public ProductModel updateProduct(String id, ProductModel model);
 }

@@ -31,7 +31,7 @@ public class ProductModel extends BaseModel {
     private String model;
 
     @NotNull
-    private double price;
+    private Double price;
 
     // required materials?
 
