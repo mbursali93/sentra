@@ -30,4 +30,8 @@ public class BaseModel {
     private boolean isDeleted = false; 
 
     private Instant deletedAt = null;
-}
+
+    public boolean getIsDeleted() {
+        return this.isDeleted;
+    }
+} 

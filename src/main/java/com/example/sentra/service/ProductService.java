@@ -36,9 +36,12 @@ public class ProductService  {
     }
 
     
-    public ProductModel delete(String id, String userId) {
+    public ProductModel delete(String id) {
         // TODO Auto-generated method stub
-        return null;
+        ProductModel product = this.findOne(id, "");
+        
+        product = productRepository.deleteProduct(id);
+        return product;
     }
 
 
