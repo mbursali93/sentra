@@ -39,7 +39,6 @@ public class JwtFilter extends OncePerRequestFilter {
 
         String requestPath = request.getServletPath();
 
-            
         if (requestPath.equals("/auth/login") || requestPath.equals("/auth/register")) {
             chain.doFilter(request, response);
             return;
@@ -55,24 +54,24 @@ public class JwtFilter extends OncePerRequestFilter {
             userId = jwtUtil.extractUserId(token);
         }
 
-       if (userId != null && SecurityContextHolder.getContext().getAuthentication() == null) {
-    if (jwtUtil.validateToken(token, userId)) {
-        // Extract roles or authorities from the token
-        List<SimpleGrantedAuthority> authorities = Collections.singletonList(
-                new SimpleGrantedAuthority(jwtUtil.extractIsAdmin(token) ? "ROLE_ADMIN" : "ROLE_USER")
-        );
+        if (userId != null && SecurityContextHolder.getContext().getAuthentication() == null) {
+            if (jwtUtil.validateToken(token, userId)) {
+                // Extract roles or authorities from the token
+                List<SimpleGrantedAuthority> authorities = Collections.singletonList(
+                        new SimpleGrantedAuthority(jwtUtil.extractIsAdmin(token) ? "ROLE_ADMIN" : "ROLE_USER"));
 
-        // Create UsernamePasswordAuthenticationToken
-        UsernamePasswordAuthenticationToken authentication = new UsernamePasswordAuthenticationToken(
-                userId, null, authorities
-        );
-        
-        authentication.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));
-        SecurityContextHolder.getContext().setAuthentication(authentication);
-        request.setAttribute("userId", userId);
-    }
-}
+                // Create UsernamePasswordAuthenticationToken
+                UsernamePasswordAuthenticationToken authentication = new UsernamePasswordAuthenticationToken(
+                        userId, null, authorities);
+
+                authentication.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));
+                SecurityContextHolder.getContext().setAuthentication(authentication);
+                request.setAttribute("userId", userId);
+            }
+        }
         chain.doFilter(request, response);
     }
+    
+    
     
 }
