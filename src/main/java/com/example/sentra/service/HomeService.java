@@ -12,7 +12,7 @@ import com.example.sentra.base.BaseService;
 import com.example.sentra.dto.CreateHomeDto;
 import com.example.sentra.dto.CreateMemberDto;
 import com.example.sentra.dto.UpdateHomeDto;
-import com.example.sentra.expections.CustomException;
+import com.example.sentra.exceptions.CustomException;
 import com.example.sentra.model.HomeModel;
 import com.example.sentra.repository.HomeRepository;
 

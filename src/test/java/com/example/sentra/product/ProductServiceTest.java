@@ -20,7 +20,7 @@ import org.springframework.http.HttpStatus;
 
 import com.example.sentra.dto.CreateProductDto;
 import com.example.sentra.dto.UpdateProductDto;
-import com.example.sentra.expections.ApiException;
+import com.example.sentra.exceptions.ApiException;
 import com.example.sentra.model.ProductModel;
 import com.example.sentra.repository.ProductRepository;
 import com.example.sentra.service.ProductService;

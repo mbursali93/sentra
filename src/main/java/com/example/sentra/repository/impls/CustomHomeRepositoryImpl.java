@@ -9,7 +9,7 @@ import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.data.mongodb.core.query.Update;
 
-import com.example.sentra.expections.CustomException;
+import com.example.sentra.exceptions.CustomException;
 import com.example.sentra.model.HomeModel;
 import com.example.sentra.model.MemberModel;
 

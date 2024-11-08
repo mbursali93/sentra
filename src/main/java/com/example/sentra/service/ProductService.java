@@ -12,7 +12,7 @@ import org.springframework.stereotype.Service;
 import com.example.sentra.base.BaseService;
 import com.example.sentra.dto.CreateProductDto;
 import com.example.sentra.dto.UpdateProductDto;
-import com.example.sentra.expections.ApiException;
+import com.example.sentra.exceptions.ApiException;
 import com.example.sentra.model.ProductModel;
 import com.example.sentra.repository.ProductRepository;
 

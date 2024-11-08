@@ -1,4 +1,4 @@
-package com.example.sentra.expections;
+package com.example.sentra.exceptions;
 
 import org.springframework.http.HttpStatus;
 

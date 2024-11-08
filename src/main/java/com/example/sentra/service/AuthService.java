@@ -5,7 +5,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.example.sentra.dto.auth.UserDto;
-import com.example.sentra.expections.CustomException;
+import com.example.sentra.exceptions.CustomException;
 import com.example.sentra.model.UserModel;
 import com.example.sentra.repository.UserRepository;
 import com.example.sentra.utils.JwtUtil;

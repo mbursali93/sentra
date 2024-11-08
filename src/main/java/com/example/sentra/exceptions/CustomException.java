@@ -1,4 +1,4 @@
-package com.example.sentra.expections;
+package com.example.sentra.exceptions;
 
 public class CustomException extends RuntimeException {
     
