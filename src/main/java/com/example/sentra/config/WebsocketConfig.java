@@ -33,7 +33,7 @@ public class WebsocketConfig implements WebSocketMessageBrokerConfigurer {
 
     @Override
     public void registerStompEndpoints(StompEndpointRegistry registry) {
-        registry.addEndpoint("/device").setAllowedOrigins(front_url).withSockJS();
+        registry.addEndpoint("/ws").setAllowedOrigins(front_url).withSockJS();
 
     }
 

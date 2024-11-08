@@ -33,8 +33,8 @@ public class SecurityConfig {
             .csrf(csrf -> csrf.disable())
             .authorizeHttpRequests(authorizeRequests -> 
                 authorizeRequests
-                    .requestMatchers("/auth/login", "/auth/register").permitAll()
-                    .anyRequest().permitAll()
+                    .requestMatchers("/auth/login", "/auth/register", "/ws/**").permitAll()
+                    .anyRequest().authenticated()
             )
             .sessionManagement(sessionManagement -> 
                 sessionManagement
