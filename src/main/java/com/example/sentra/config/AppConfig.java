@@ -5,6 +5,8 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
+import com.example.sentra.utils.JwtUtil;
+
 import lombok.AllArgsConstructor;
 
 @Configuration
@@ -21,4 +23,5 @@ public class AppConfig {
 
         return new BCryptPasswordEncoder();
     }
+
 }

@@ -33,6 +33,8 @@ public class JwtUtil {
     }
 
     public String extractUserId(String token) {
+        if (token.startsWith("Bearer"))
+            token = this.getTokenFromHeader(token);
         return extractClaim(token, Claims::getSubject);
     }
 
@@ -81,4 +83,10 @@ public class JwtUtil {
         String id = extractUserId(token);
         return (userId.equals(id) && !isTokenExpired(token));
     }
+
+    private String getTokenFromHeader(String headerToken) {
+
+        return headerToken.substring(7);
+    }
+
 }
