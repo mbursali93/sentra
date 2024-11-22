@@ -1,0 +1,14 @@
+spring:
+  data:
+    mongodb:
+      database: sentra
+      username: root
+      password: secret
+      url: mongodb://root:secret@localhost:27016/sentra?authSource=admin
+  urls:
+    front_url: http://localhost:3000
+  security:
+    auth:
+      jwt_secret: jwt-secret
+
+    
