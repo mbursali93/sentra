@@ -1,28 +1,29 @@
 package com.example.sentra.utils;
 
 
-import io.jsonwebtoken.Claims;
-import io.jsonwebtoken.Jwts;
-import io.jsonwebtoken.SignatureAlgorithm;
-import io.jsonwebtoken.security.Keys;
-import jakarta.annotation.PostConstruct;
-
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.stereotype.Service;
-
-// import javax.annotation.PostConstruct;
 import java.security.Key;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.function.Function;
 
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.stereotype.Service;
+
+import io.jsonwebtoken.Claims;
+import io.jsonwebtoken.Jwts;
+import io.jsonwebtoken.SignatureAlgorithm;
+import io.jsonwebtoken.security.Keys;
+import jakarta.annotation.PostConstruct;
+
 @Service
 public class JwtUtil {
 
     @Value("${spring.security.auth.jwt_secret}")
     private String jwtSecret;
+
+    @Value("${spring.environment}")
+    private String environment;
 
     private Key key;
 
@@ -70,11 +71,12 @@ public class JwtUtil {
     }
 
     private String createToken(Map<String, Object> claims, String subject) {
+        int data = environment.equals("product") ? 1000 * 60 * 20  : 1000 * 60 * 60 * 24 * 1000; // 20 minutes or 1000 days
         return Jwts.builder()
                 .setClaims(claims)
                 .setSubject(subject)
                 .setIssuedAt(new Date())
-                .setExpiration(new Date(System.currentTimeMillis() + 1000 * 60 * 60 * 10))  // 10 hours
+                .setExpiration(new Date(System.currentTimeMillis() + data))
                 .signWith(key, SignatureAlgorithm.HS256)
                 .compact();
     }
